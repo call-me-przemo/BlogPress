@@ -4,9 +4,10 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import hbs from 'hbs';
 import session from 'express-session';
-import path from 'path';
+import { join } from 'path';
 import { __dirname } from './rootdir.js';
 import { router as indexRouter } from './routes/index.js';
+import { sequelize } from './models/connection.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,14 +16,14 @@ const server = app.listen(port, () => {
     console.log(`App listening on port: ${port}`);
 });
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-hbs.registerPartials(path.join(__dirname, 'views/partials'));
+hbs.registerPartials(join(__dirname, 'views/partials'));
 
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
@@ -46,6 +47,7 @@ app.use((err, req, res, next) => {
 // 
 // async function close() {
     // await closeServer(server);
+    // await sequelize.close();
 // }
 // 
 // function closeServer(server) {
@@ -60,3 +62,4 @@ app.use((err, req, res, next) => {
         // })
     // })
 // }
+// 

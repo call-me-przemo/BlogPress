@@ -1,0 +1,5 @@
+database: blogpress
+username: blogpress
+password: blogpress
+host: localhost
+dialect: mysql

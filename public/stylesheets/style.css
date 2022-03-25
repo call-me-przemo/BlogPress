@@ -472,31 +472,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: relative;
 }
 
-<<<<<<< HEAD
-=======
-.m-2 {
-  margin: 0.5rem;
-}
-
->>>>>>> 7e227a9a29981ac63e4c52c696923c335a9485db
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
 
-<<<<<<< HEAD
 .mt-2 {
   margin-top: 0.5rem;
-=======
-.my-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
->>>>>>> 7e227a9a29981ac63e4c52c696923c335a9485db
 }
 
 .flex {
@@ -507,13 +489,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-<<<<<<< HEAD
 .h-full {
   height: 100%;
 }
 
-=======
->>>>>>> 7e227a9a29981ac63e4c52c696923c335a9485db
 .h-screen {
   height: 100vh;
 }
@@ -526,43 +505,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 2.5rem;
 }
 
-<<<<<<< HEAD
-=======
-.h-full {
-  height: 100%;
-}
-
-.h-auto {
-  height: auto;
-}
-
-.h-max {
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
-}
-
-.h-1\/2 {
-  height: 50%;
-}
-
-.h-3\/4 {
-  height: 75%;
-}
-
-.h-5\/6 {
-  height: 83.333333%;
-}
-
-.min-h-screen {
-  min-height: 100vh;
-}
-
-.min-h-full {
-  min-height: 100%;
-}
-
->>>>>>> 7e227a9a29981ac63e4c52c696923c335a9485db
 .w-16 {
   width: 4rem;
 }
@@ -592,14 +534,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-<<<<<<< HEAD
-=======
-.bg-lime-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(163 230 53 / var(--tw-bg-opacity));
-}
-
->>>>>>> 7e227a9a29981ac63e4c52c696923c335a9485db
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -617,13 +551,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 0.25rem;
 }
 
-<<<<<<< HEAD
-=======
-.p-4 {
-  padding: 1rem;
-}
-
->>>>>>> 7e227a9a29981ac63e4c52c696923c335a9485db
 .text-center {
   text-align: center;
 }
@@ -633,13 +560,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1;
 }
 
-<<<<<<< HEAD
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
 .text-8xl {
   font-size: 6rem;
-=======
-.text-5xl {
-  font-size: 3rem;
->>>>>>> 7e227a9a29981ac63e4c52c696923c335a9485db
   line-height: 1;
 }
 
@@ -648,19 +575,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 2.5rem;
 }
 
-<<<<<<< HEAD
-.text-7xl {
-  font-size: 4.5rem;
-  line-height: 1;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
-=======
->>>>>>> 7e227a9a29981ac63e4c52c696923c335a9485db
 .font-extrabold {
   font-weight: 800;
 }
@@ -683,39 +597,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-<<<<<<< HEAD
-=======
-.hover\:text-\[rgb\(255\2c 222\2c 32\)\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(255 222 32 / var(--tw-text-opacity));
-}
-
-.hover\:text-\[rgb\(168\2c 166\2c 166\)\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(168 166 166 / var(--tw-text-opacity));
-}
-
-.hover\:text-yellow-100:hover {
-  --tw-text-opacity: 1;
-  color: rgb(254 249 195 / var(--tw-text-opacity));
-}
-
-.hover\:text-slate-100:hover {
-  --tw-text-opacity: 1;
-  color: rgb(241 245 249 / var(--tw-text-opacity));
-}
-
-.hover\:text-yellow-200:hover {
-  --tw-text-opacity: 1;
-  color: rgb(254 240 138 / var(--tw-text-opacity));
-}
-
-.hover\:text-slate-200:hover {
-  --tw-text-opacity: 1;
-  color: rgb(226 232 240 / var(--tw-text-opacity));
-}
-
->>>>>>> 7e227a9a29981ac63e4c52c696923c335a9485db
 .hover\:text-yellow-300:hover {
   --tw-text-opacity: 1;
   color: rgb(253 224 71 / var(--tw-text-opacity));
@@ -726,19 +607,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(203 213 225 / var(--tw-text-opacity));
 }
 
-<<<<<<< HEAD
-=======
-.hover\:text-yellow-400:hover {
-  --tw-text-opacity: 1;
-  color: rgb(250 204 21 / var(--tw-text-opacity));
-}
-
-.hover\:text-slate-400:hover {
-  --tw-text-opacity: 1;
-  color: rgb(148 163 184 / var(--tw-text-opacity));
-}
-
->>>>>>> 7e227a9a29981ac63e4c52c696923c335a9485db
 .dark .dark\:bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));

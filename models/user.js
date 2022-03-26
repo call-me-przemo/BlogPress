@@ -1,7 +1,5 @@
 import { sequelize } from './connection.js';
 import { Model, DataTypes } from 'sequelize';
-import { Post } from './post.js';
-import { Author } from './author.js';
 
 export class User extends Model {}
 
@@ -34,5 +32,3 @@ User.init({
     sequelize,
     modelName: 'User'
 });
-
-User.belongsToMany(Post, { through: Author });

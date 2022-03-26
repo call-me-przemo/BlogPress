@@ -8,6 +8,7 @@ import { join } from 'path';
 import { __dirname } from './rootdir.js';
 import { router as indexRouter } from './routes/index.js';
 import { sequelize } from './models/connection.js';
+import './models/sync.js';
 
 const app = express();
 const port = process.env.PORT || 3000;

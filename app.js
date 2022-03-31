@@ -8,7 +8,7 @@ import { join } from 'path';
 import { __dirname } from './rootdir.js';
 import { router as indexRouter } from './routes/index.js';
 import { sequelize } from './models/connection.js';
-import './models/sync.js';
+import store from './models/session.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -25,6 +25,13 @@ app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
+app.use(session({
+    secret: "jaspdoifnwpdofiou0981u324",
+    store,
+    resave: false,
+    saveUninitialized: true,
+    name: 'sid',
+}));
 
 app.use('/', indexRouter);
 

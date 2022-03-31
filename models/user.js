@@ -27,6 +27,14 @@ User.init({
     active: {
         type: DataTypes.BOOLEAN,
         allowNull: false
+    },
+    rememberToken: {
+        type: DataTypes.STRING,
+        unique: true
+    },
+    activationToken: {
+        type: DataTypes.STRING,
+        unique: true
     }
 }, {
     sequelize,

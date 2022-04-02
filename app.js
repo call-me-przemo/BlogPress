@@ -7,11 +7,14 @@ import session from 'express-session';
 import { join } from 'path';
 import { __dirname } from './rootdir.js';
 import { router as indexRouter } from './routes/index.js';
-import { sequelize } from './models/connection.js';
-import store from './models/session.js';
+import { sequelize } from './db/connection.js';
+import store from './db/session.js';
+import { router as accountRouter } from './routes/account.js';
+import csurf from 'csurf';
 
 const app = express();
 const port = process.env.PORT || 3000;
+const csrf = csurf();
 
 const server = app.listen(port, () => {
     console.log(`App listening on port: ${port}`);
@@ -29,11 +32,11 @@ app.use(session({
     secret: "jaspdoifnwpdofiou0981u324",
     store,
     resave: false,
-    saveUninitialized: true,
-    name: 'sid',
+    saveUninitialized: true
 }));
 
 app.use('/', indexRouter);
+app.use('/account', csrf, accountRouter);
 
 app.use((req, res, next) => {
     next(createError(404));

@@ -1,4 +1,4 @@
-import { sequelize } from './connection.js';
+import { sequelize } from '../connection.js';
 import { Model, DataTypes } from 'sequelize';
 
 export class User extends Model {}

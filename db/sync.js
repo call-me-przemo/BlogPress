@@ -1,7 +1,7 @@
-import { User } from './user.js';
-import { Post } from './post.js';
-import { Author } from './author.js';
-import { Comment } from './comment.js';
+import { User } from './models/user.js';
+import { Post } from './models/post.js';
+import { Author } from './models/author.js';
+import { Comment } from './models/comment.js';
 import Session from './session.js';
 import { sequelize } from './connection.js'; 
 

@@ -11,6 +11,7 @@ import { sequelize } from './db/connection.js';
 import store from './db/session.js';
 import { router as accountRouter } from './routes/account.js';
 import csurf from 'csurf';
+import compression from 'compression';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(join(__dirname, 'views/partials'));
 
+app.use(compression());
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

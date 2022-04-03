@@ -1,4 +1,4 @@
-<div class="flex flex-col relative h-full justify-center items-center m-16 mx-32 border border-cyan-500 dark:border-lime-400 rounded-md text-lg">
+<div class="flex flex-col relative h-full justify-center items-center m-16 mx-32 border border-cyan-500 dark:border-lime-400 rounded text-lg">
     <div class="mb-14 font-semibold text-6xl absolute top-6">
         Sign in
     </div>
@@ -6,15 +6,22 @@
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <label class="flex justify-between items-center my-6">
             <div>Login:</div>
-            <input type="text" class="dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded-md px-2">
+            <input type="text" required name="login" minlength="4" maxlength="30"
+            class="dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2">
         </label>
         <label class="flex justify-between items-center my-6">
             <div>Password:</div>
-            <input type="password" class="dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded-md px-2">
+            <input type="password" required name="password" minlength="10" maxlength="50"
+            class="dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2">
         </label>
         <label class="flex items-center ml-4">
-            <input type="checkbox" class="mr-2">
+            <input type="checkbox" name="staySigned"
+            class="mr-2 p-1.5 rounded cursor-pointer appearance-none border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 checked:bg-cyan-500 dark:checked:bg-lime-500">
             <div>Stay signed in</div>
         </label>
+        <div class="text-center my-4">
+            <input type="submit" value="Sign in"
+            class="px-4 py-2 border border-cyan-400 dark:border-lime-400 rounded cursor-pointer hover:bg-gradient-to-r focus:bg-gradient-to-r from-lime-400 to-cyan-400 focus:outline outline-cyan-400 dark:outline-lime-400">
+        </div>
     </form>
 </div>

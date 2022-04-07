@@ -2,6 +2,11 @@
     <div class="mb-14 font-semibold text-6xl absolute top-6">
         Sign in
     </div>
+    {{#if message}}
+    <div class="text-red-600 font-semibold text-xl">
+        {{message}}
+    </div>
+    {{/if}}
     <form action="/account/login" method="post" class="w-1/3">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <label class="flex justify-between items-center my-6">

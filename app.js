@@ -13,7 +13,7 @@ import { router as accountRouter } from './routes/account.js';
 import csurf from 'csurf';
 import compression from 'compression';
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 3000;
 const csrf = csurf();
 

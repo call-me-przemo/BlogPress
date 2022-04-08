@@ -6,7 +6,8 @@ export class User extends Model {}
 User.init({
     nick: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     password: {
         type: DataTypes.STRING,
@@ -14,7 +15,8 @@ User.init({
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     firstName: {
         type: DataTypes.STRING,

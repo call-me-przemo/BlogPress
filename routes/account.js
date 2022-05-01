@@ -37,6 +37,9 @@ router.post('/register', validateRegister, register, (req, res, next) => {
     res.redirect('/account');
 });
 
+router.post('/register', validateRegister, register, (req, res, next) => {
+    res.redirect('/account');
+});
 router.get('/logout', isUser, logout, (req, res, next) => {
     res.redirect('/');
 });

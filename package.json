@@ -10,7 +10,7 @@
     "create-db": "node ./db/sync.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ernest Misha",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -25,6 +25,7 @@
     "js-yaml": "^4.1.0",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
+    "nodemailer": "^6.7.4",
     "sequelize": "^6.17.0",
     "validator": "^13.7.0"
   },

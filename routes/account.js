@@ -1,44 +1,42 @@
-import { app } from '../app.js';
-import { validateLogin, validateRegister } from '../auth/index.js';
+import { validateLogin, validateRegister, login, register, isUser, logout, isGuest } from '../auth/index.js';
 import express from 'express';
 export const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    res.end();
+router.get('/', isUser, (req, res, next) => {
+    res.render('account', {
+        title: 'Account',
+        account: true
+    });
 });
 
-router.get('/login', (req, res, next) => {
-    let message;
-    if(app.locals?.loginError) {
-        message = app.locals.loginError.message;
-        delete app.locals.loginError;
-    }
+router.get('/login', isGuest, (req, res, next) => {
     res.render('login', {
         title: 'Sign in',
         login: true,
         csrfToken: req.csrfToken(),
-        message
+        message: req.session.formError
     });
+    delete req.session.formError;
 });
 
-router.post('/login', validateLogin, (req, res, next) => {
-    
+router.post('/login', validateLogin, login, (req, res, next) => {
+    res.redirect('/account');
 });
 
-router.get('/register', (req, res, next) => {
-    let message;
-    if(app.locals?.registerError) {
-        message = app.locals.registerError.message;
-        delete app.locals.registerError;
-    }
+router.get('/register', isGuest, (req, res, next) => {
     res.render('register', {
         title: 'Sign up',
         register: true,
         csrfToken: req.csrfToken(),
-        message
+        message: req.session.formError
     });
+    delete req.session.formError;
 });
 
-router.post('/register', validateRegister, (req, res, next) => {
-    
+router.post('/register', validateRegister, register, (req, res, next) => {
+    res.redirect('/account');
+});
+
+router.get('/logout', isUser, logout, (req, res, next) => {
+    res.redirect('/');
 });

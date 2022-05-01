@@ -7,7 +7,6 @@ import session from 'express-session';
 import { join } from 'path';
 import { __dirname } from './rootdir.js';
 import { router as indexRouter } from './routes/index.js';
-import { sequelize } from './db/connection.js';
 import store from './db/session.js';
 import { router as accountRouter } from './routes/account.js';
 import csurf from 'csurf';
@@ -37,6 +36,10 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.use((req, res, next) => {
+    res.locals.logged = req.session.userId ? true : false;
+    next();
+});
 app.use('/', indexRouter);
 app.use('/account', csrf, accountRouter);
 

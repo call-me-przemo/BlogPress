@@ -37,7 +37,8 @@ User.init({
     activationToken: {
         type: DataTypes.STRING,
         unique: true
-    }
+    },
+    avatarPath: DataTypes.STRING
 }, {
     sequelize,
     modelName: 'User'

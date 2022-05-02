@@ -7,11 +7,22 @@ export default new sessionStore({
     db: sequelize
 });
 
-export function asyncInvoke(req, name) {
+export function destroyAsync(req) {
     return new Promise((resolve, reject) => {
-        req.session[name](err => {
+        req.session.destroy((err) => {
             if(err) {
-                reject();
+                reject(err);
+            }
+            resolve();
+        });
+    });
+}
+
+export function regenerateAsync(req) {
+    return new Promise((resolve, reject) => {
+        req.session.regenerate((err) => {
+            if(err) {
+                reject(err);
             }
             resolve();
         });

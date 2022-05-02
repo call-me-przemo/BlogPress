@@ -1,8 +1,8 @@
 import validator from 'validator';
 import { User } from '../db/models/user.js';
-import { hash, compare } from 'bcrypt';
+import { scrypt } from 'crypto';
 import createError from 'http-errors';
-import { asyncInvoke } from '../db/session.js';
+import { destroyAsync, regenerateAsync } from '../db/session.js';
 import { Op } from 'sequelize';
 
 export function validateLogin(req, res, next) {
@@ -64,11 +64,12 @@ export async function login(req, res, next) {
                 nick: req.body.nick,
             }
         });
-        if(!user || !await compare(req.body.password, user.password)) {
+        const hash = await scryptAsync(req.body.password, req.body.nick, 64);
+        if(!user || ( user.password != hash )) {
             req.session.formError = 'Given credentials are incorrect';
             return res.redirect('/account/login');
         }
-        await asyncInvoke(req, 'regenerate');
+        await regenerateAsync(req);
     }
     catch(err) {
         return next(createError(500));
@@ -79,8 +80,7 @@ export async function login(req, res, next) {
 
 export async function logout(req, res, next) {
     try {
-        await asyncInvoke(req, 'destroy');
-        // await asyncInvoke(req, 'regenerate');
+        await destroyAsync(req);
     }
     catch(err) {
         return next(createError(500));
@@ -109,7 +109,7 @@ export async function register(req, res, next) {
             defaults: {
                 nick: req.body.nick,
                 email: req.body.email,
-                password: await hash(req.body.password, 10),
+                password: await scryptAsync(req.body.password, req.body.nick, 64),
                 firstName: req.body.name,
                 lastName: req.body.surname,
                 active: false
@@ -119,7 +119,7 @@ export async function register(req, res, next) {
             req.session.formError = 'Given nick or email already exists, please choose another one';
             return res.redirect('/account/register');
         }
-        await asyncInvoke(req, 'regenerate');
+        await regenerateAsync(req);
     }
     catch(err) {
         return next(createError(500));
@@ -135,4 +135,15 @@ export function isGuest(req, res, next) {
     else {
         next(createError(403));
     }
+}
+
+function scryptAsync(password, salt, keylen) {
+    return new Promise((resolve, reject) => {
+        scrypt(password, salt, keylen, (err, hash) => {
+            if(err) {
+                reject(err);
+            }
+            resolve(hash.toString('hex'));
+        });
+    });
 }

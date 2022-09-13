@@ -5,9 +5,11 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon .",
-    "css": "npx tailwind -c ./tailwindcss/tailwind.config.cjs -i ./tailwindcss/tailwind.css -o ./public/stylesheets/style.css --watch",
-    "create-db": "node ./db/sync.js"
+    "dev:start-watch": "node-dev .",
+    "dev:css-watch": "tailwind -c ./tailwindcss/tailwind.config.cjs -i ./tailwindcss/tailwind.css -o ./public/stylesheets/style.css --watch",
+    "dev:start-db": "docker run -d --rm -p3306:3306 -e MYSQL_ROOT_PASSWORD=mysql_root --name db mysql",
+    "dev:setup-db": "node ./db/setup.js",
+    "dev:migrate-db": "node ./db/migrate.js"
   },
   "keywords": [],
   "author": "Ernest Misha",
@@ -29,7 +31,8 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15",
+    "node-dev": "^7.4.3",
+    "prettier": "^2.7.1",
     "tailwindcss": "^3.0.23"
   }
 }

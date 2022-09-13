@@ -1,35 +1,38 @@
-import { sequelize } from '../connection.js';
-import { Model, DataTypes } from 'sequelize';
+import { sequelize } from "../connection.js";
+import { Model, DataTypes } from "sequelize";
 
 export class Comment extends Model {}
 
-Comment.init({
+Comment.init(
+  {
     UserId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: {
-                tableName: 'Users'
-            }
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: {
+          tableName: "Users",
         },
-        key: 'id'
+      },
+      key: "id",
     },
     PostId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: {
-                tableName: 'Posts'
-            }
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: {
+          tableName: "Posts",
         },
-        key: 'id'
+      },
+      key: "id",
     },
     rate: DataTypes.TINYINT,
     content: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-}, {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
     sequelize,
-    modelName: 'Comment'
-});
+    modelName: "Comment",
+  }
+);

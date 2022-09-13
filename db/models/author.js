@@ -1,30 +1,33 @@
-import { sequelize } from '../connection.js';
-import { Model, DataTypes } from 'sequelize';
+import { sequelize } from "../connection.js";
+import { Model, DataTypes } from "sequelize";
 
 export class Author extends Model {}
 
-Author.init({
+Author.init(
+  {
     UserId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        references: {
-            model: {
-                tableName: 'Users'
-            }
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      references: {
+        model: {
+          tableName: "Users",
         },
-        key: 'id'
+      },
+      key: "id",
     },
     PostId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        references: {
-            model: {
-                tableName: 'Posts'
-            }
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      references: {
+        model: {
+          tableName: "Posts",
         },
-        key: 'id'
-    }
-}, {
+      },
+      key: "id",
+    },
+  },
+  {
     sequelize,
-    modelName: 'Author'
-});
+    modelName: "Author",
+  }
+);

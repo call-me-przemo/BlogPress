@@ -1,8 +1,8 @@
 module.exports = {
   content: ["./views/**/*.hbs"],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};

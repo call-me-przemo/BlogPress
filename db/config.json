@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "blogpress",
+    "password": "blogpress",
+    "database": "blogpress",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "blogpress",
+    "password": "blogpress",
+    "database": "blogpress",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "blogpress",
+    "password": "blogpress",
+    "database": "blogpress",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

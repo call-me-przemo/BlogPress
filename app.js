@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 const csrf = csurf();
 
 const server = app.listen(port, () => {
-  console.log(`App listening on port: ${port}`);
+  console.log(`App listening on: http://localhost:${port}`);
 });
 
 app.set("views", join(__dirname, "views"));

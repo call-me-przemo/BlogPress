@@ -137,7 +137,7 @@ export function isGuest(req, res, next) {
   }
 }
 
-function scryptAsync(password, salt, keylen) {
+export function scryptAsync(password, salt, keylen) {
   return new Promise((resolve, reject) => {
     scrypt(password, salt, keylen, (err, hash) => {
       if (err) {

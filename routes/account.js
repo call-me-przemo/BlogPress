@@ -6,6 +6,7 @@ import {
   isUser,
   logout,
   isGuest,
+  activateAccount,
 } from "../auth/index.js";
 import express from "express";
 export const router = express.Router();
@@ -47,4 +48,10 @@ router.post("/register", validateRegister, register, (req, res, next) => {
 
 router.get("/logout", isUser, logout, (req, res, next) => {
   res.redirect("/");
+});
+
+router.get("/activate/:uuid", activateAccount, (req, res, next) => {
+  res.render("confirmActivation", {
+    title: "Activation completed",
+  });
 });

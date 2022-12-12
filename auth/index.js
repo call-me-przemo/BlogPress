@@ -4,6 +4,8 @@ import { scrypt } from "crypto";
 import createError from "http-errors";
 import { destroyAsync, regenerateAsync } from "../db/session.js";
 import { Op } from "sequelize";
+import { v4 as uuid, validate } from "uuid";
+import { sendActivationMail } from "../mail/index.js";
 
 export function validateLogin(req, res, next) {
   try {
@@ -114,6 +116,7 @@ export async function register(req, res, next) {
         firstName: req.body.name,
         lastName: req.body.surname,
         active: false,
+        activationToken: uuid(),
       },
     });
     if (!created) {
@@ -126,11 +129,12 @@ export async function register(req, res, next) {
     return next(createError(500));
   }
   req.session.userId = user.id;
+  sendActivationMail(user.email, user.activationToken);
   return next();
 }
 
 export function isGuest(req, res, next) {
-  if (!req?.session?.userId && !req.session?.adminId) {
+  if (!req?.session?.userId) {
     next();
   } else {
     next(createError(403));
@@ -146,4 +150,31 @@ export function scryptAsync(password, salt, keylen) {
       resolve(hash.toString("hex"));
     });
   });
+}
+
+export async function activateAccount(req, res, next) {
+  const uuid = req.params.uuid;
+  let user;
+  if (!validate(uuid)) {
+    return next(createError(404));
+  }
+
+  try {
+    user = await User.findOne({
+      where: { activationToken: uuid },
+    });
+
+    if (!user) {
+      return next(createError(404));
+    }
+
+    await user.update({
+      active: true,
+      activationToken: null,
+    });
+  } catch (err) {
+    return next(createError(500));
+  }
+
+  return next();
 }

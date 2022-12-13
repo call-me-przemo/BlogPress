@@ -134,7 +134,7 @@ export async function register(req, res, next) {
 }
 
 export function isGuest(req, res, next) {
-  if (!req?.session?.userId) {
+  if (!req?.session?.userId && !req?.session.adminId) {
     next();
   } else {
     next(createError(403));

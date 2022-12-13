@@ -12,6 +12,6 @@ await connection.query(
 );
 await connection.query(`GRANT ALL PRIVILEGES ON blogpress.* to blogpress`);
 
-console.log("Databse has been created");
+console.log("Database has been created");
 
 await connection.end();

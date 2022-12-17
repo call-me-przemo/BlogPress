@@ -14,6 +14,7 @@ module.exports = {
      * }], {});
      */
     const { scryptAsync } = await auth;
+    const now = new Date();
 
     await queryInterface.bulkInsert("Users", [
       {
@@ -23,8 +24,8 @@ module.exports = {
         firstName: "John",
         lastName: "Doe",
         active: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: now,
+        updatedAt: now,
       },
       {
         nick: "Another user",
@@ -33,8 +34,38 @@ module.exports = {
         firstName: "Jane",
         lastName: "Freeman",
         active: true,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: now,
+        updatedAt: now,
+      },
+      {
+        nick: "Fast writer",
+        password: await scryptAsync("fastWriterPass", "Fast writer", 64),
+        email: "writer@mail.com",
+        firstName: "Amy",
+        lastName: "Lazarus",
+        active: true,
+        createdAt: now,
+        updatedAt: now,
+      },
+      {
+        nick: "Impatient reader",
+        password: await scryptAsync("mySecretPass88", "Impatient reader", 64),
+        email: "bookworm@library.com",
+        firstName: "Mark",
+        lastName: "Flatsugar",
+        active: true,
+        createdAt: now,
+        updatedAt: now,
+      },
+      {
+        nick: "Fearless stuntgirl",
+        password: await scryptAsync("realBadassGirl", "Fearless stuntgirl", 64),
+        email: "ironfemale@whitewhale.org",
+        firstName: "Kate",
+        lastName: "Jolie",
+        active: true,
+        createdAt: now,
+        updatedAt: now,
       },
     ]);
   },

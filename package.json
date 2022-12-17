@@ -11,6 +11,7 @@
     "dev:setup-db": "node ./db/setup.js",
     "dev:migrate-db": "node ./db/migrate.js",
     "dev:seed-db": "sequelize db:seed:all --seeders-path db/seeders --config db/config.json",
+    "dev:seed-reverse": "sequelize db:seed:undo:all --seeders-path db/seeders --config db/config.json",
     "dev:format": "prettier --write ."
   },
   "keywords": [],

@@ -26,6 +26,8 @@ module.exports = {
         active: false,
         createdAt: now,
         updatedAt: now,
+        city: "Torino",
+        avatarPath: "sample.jpeg",
       },
       {
         nick: "Another user",
@@ -36,6 +38,10 @@ module.exports = {
         active: true,
         createdAt: now,
         updatedAt: now,
+        country: "USA",
+        city: "Los Angeles",
+        about:
+          "Tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus. Viverra nibh cras pulvinar mattis nunc sed blandit libero volutpat. Id consectetur purus ut faucibus pulvinar. Donec ac odio tempor orci dapibus ultrices in iaculis nunc.",
       },
       {
         nick: "Fast writer",
@@ -46,6 +52,11 @@ module.exports = {
         active: true,
         createdAt: now,
         updatedAt: now,
+        country: "Ukraine",
+        city: "Kyiv",
+        about:
+          "met nisl suscipit adipiscing bibendum est ultricies integer. Cursus mattis molestie a iaculis.",
+        avatarPath: "sample.jpeg",
       },
       {
         nick: "Impatient reader",
@@ -56,6 +67,7 @@ module.exports = {
         active: true,
         createdAt: now,
         updatedAt: now,
+        country: "China",
       },
       {
         nick: "Fearless stuntgirl",

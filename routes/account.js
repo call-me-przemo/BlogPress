@@ -9,12 +9,30 @@ import {
   activateAccount,
 } from "../auth/index.js";
 import express from "express";
+import { User } from "../db/models/user.js";
+import { Post } from "../db/models/post.js";
+import createError from "http-errors";
+
 export const router = express.Router();
 
-router.get("/", isUser, (req, res, next) => {
+router.get("/", isUser, async (req, res, next) => {
+  let user;
+  try {
+    user = await User.findByPk(req.session.userId, {
+      include: Post,
+      order: [[Post, "createdAt", "DESC"]],
+      limit: 10,
+      subQuery: false,
+    });
+  } catch (err) {
+    return next(createError(500));
+  }
+  user = user.get();
+
   res.render("account", {
     title: "Account",
     account: true,
+    user,
   });
 });
 

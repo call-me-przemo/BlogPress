@@ -12,6 +12,7 @@ import { router as accountRouter } from "./routes/account.js";
 import csurf from "csurf";
 import compression from "compression";
 import { sequelize } from "./db/connection.js";
+import "./db/relations.js";
 
 export const app = express();
 const port = process.env.PORT || 3000;

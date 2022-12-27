@@ -13,6 +13,7 @@ Post.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    logoPath: DataTypes.STRING,
   },
   {
     sequelize,

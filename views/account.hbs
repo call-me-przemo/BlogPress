@@ -1,3 +1,249 @@
-<div class="center text-2xl font-bold">
-  Hi!!!
-</div>
+{{#with user}}
+  <div
+    class="flex flex-col relative h-full justify-center items-center my-8 mx-24 text-lg"
+  >
+    <div class="w-full h-1/10 text-3xl font-semibold mb-4">
+      <h1>Hello {{nick}}</h1>
+    </div>
+    <div
+      class="border border-cyan-500 dark:border-lime-400 rounded w-full h-full flex flex-row divide-x divide-dashed divide-cyan-400 dark:divide-lime-300"
+    >
+      <div class="w-1/2 h-full text-center text-2xl font-medium flex flex-col">
+        <h2 class="m-3">Your latest ten posts</h2>
+        <div
+          class="h-full w-full text-lg font-normal flex flex-col justify-center items-center divide-y divide-cyan-400 dark:divide-lime-300"
+        >
+          {{#unless Posts.length}}
+            <div>You don't have any posts yet!</div>
+          {{/unless}}
+          {{#each Posts}}
+            <a class="w-5/6 p-2 hover:text-amber-400" href="/posts/{{this.id}}">
+              {{this.subject}}
+            </a>
+          {{/each}}
+        </div>
+        <div class="w-full p-4">
+          <a href="/posts/create">
+            <button
+              class="bg-lime-600 hover:bg-lime-400  border-2 border-yellow-600 hover:border-yellow-400 rounded-lg mx-2 px-2 py-1 text-lg"
+            >
+              Create new post
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="w-1/2 h-full text-center text-2xl font-medium flex flex-col">
+        <h2 class="m-3">Your profile</h2>
+        <div
+          class="h-full w-full text-lg font-normal flex flex-col justify-center items-center"
+        >
+          <div>
+            <img
+              src="images/users/{{#unless this.avatarPath}}default.png{{/unless}}{{#if this.avatarPath}}{{avatarPath}}{{/if}}"
+              alt="user avatar"
+              class="w-1/4 rounded-full mx-auto my-6"
+            />
+            <button
+              class="bg-teal-600 hover:bg-teal-400  border-2 border-yellow-600 hover:border-yellow-400 rounded-lg mx-2 px-2 py-1 text-lg w-36 hidden truncate"
+              id="uploadPhotoBtn"
+              onclick="photoInput.click()"
+            >
+              Upload photo
+            </button>
+          </div>
+            <form action="" method="post" id="userDataForm" enctype="multipart/form-data" class="m-4 w-3/4">
+              <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+              <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
+                <div>Nick:</div>
+                  <input type="text"
+                  class="userDataInput text-center w-4/6 dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2 cursor-not-allowed"
+                  name="nick"
+                  minlength="4"
+                  maxlength="30"
+                  value="{{this.nick}}"
+                  disabled>
+              </label>
+              <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
+                <div>First name:</div>
+                  <input type="text"
+                  class="userDataInput text-center w-4/6 dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2 cursor-not-allowed"
+                  name="firstName"
+                  minlength="2"
+                  maxlength="50"
+                  value="{{this.firstName}}"
+                  disabled>
+              </label>
+              <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
+                <div>Last name:</div>
+                  <input type="text"
+                  class="userDataInput text-center w-4/6 dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2 cursor-not-allowed"
+                  name="lastName"
+                  minlength="2"
+                  maxlength="50"
+                  value="{{this.lastName}}"
+                  disabled>
+              </label>
+              <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
+                <div>Email:</div>
+                  <input type="text"
+                  class="userDataInput text-center w-4/6 dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2 cursor-not-allowed"
+                  name="email"
+                  type="email"
+                  minlength="4"
+                  maxlength="50"
+                  value="{{this.email}}"
+                  disabled>
+              </label>
+              <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
+                <div>Country:</div>
+                  <input type="text"
+                  class="userDataInput text-center w-4/6 dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2 cursor-not-allowed"
+                  name="country"
+                  minlength="2"
+                  maxlength="50"
+                  value="{{this.country}}"
+                  disabled>
+              </label>
+              <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
+                <div>City:</div>
+                  <input type="text"
+                  class="userDataInput text-center w-4/6 dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2 cursor-not-allowed"
+                  name="city"
+                  minlength="2"
+                  maxlength="50"
+                  value="{{this.city}}"
+                  disabled>
+              </label>
+              <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
+                <div>About you:</div>
+                  <textarea type="text"
+                  class="userDataInput w-4/6 resize-none dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2 cursor-not-allowed"
+                  name="about"
+                  minlength="10"
+                  maxlength="2000"
+                  rows="12"
+                  disabled>{{this.about}}</textarea>
+              </label>
+              <label class="hidden justify-between m-6 cursor-not-allowed w-full userPasswordLabel">
+                <div>Current password:</div>
+                  <input type="password"
+                  class="userPasswordInput text-center w-1/2 dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2"
+                  name="currentPassword"
+                  minlength="10"
+                  maxlength="50">
+              </label>
+              <label class="hidden justify-between m-6 cursor-not-allowed w-full userPasswordLabel">
+                <div>New password:</div>
+                  <input type="password"
+                  class="userPasswordInput text-center w-1/2 dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2"
+                  name="newPassword"
+                  minlength="10"
+                  maxlength="50">
+              </label>
+              <label class="hidden justify-between m-6 cursor-not-allowed w-full userPasswordLabel">
+                <div>Confirm new password:</div>
+                  <input type="password"
+                  class="userPasswordInput text-center w-1/2 dark:bg-black dark:text-white border border-cyan-400 dark:border-lime-400 focus:outline outline-cyan-400 dark:outline-lime-400 focus:ring-2 ring-cyan-400 dark:ring-lime-400 rounded px-2"
+                  name="newPasswordConfirmation"
+                  minlength="10"
+                  maxlength="50">
+              </label>
+              <input type="file" name="photo" id="photo" class="hidden" onchange="uploadPhotoBtn.textContent = this.files[0].name" accept="image/*">
+            </form>
+        </div>
+        <div class="w-full p-4">
+          <button
+            class="bg-teal-600 hover:bg-teal-400  border-2 border-yellow-600 hover:border-yellow-400 rounded-lg mx-2 px-2 py-1 text-lg"
+            id="editBtn"
+            onclick="handleEditClick()"
+          >
+            Edit
+          </button>
+          <button
+            class="bg-red-600 hover:bg-red-400  border-2 border-yellow-600 hover:border-yellow-400 rounded-lg mx-2 px-2 py-1 text-lg hidden"
+            id="cancelBtn"
+            onclick="handleCancelClick()"
+            type="reset"
+            form="userDataForm"
+          >
+            Cancel
+          </button>
+          <button
+            class="bg-teal-600 hover:bg-teal-400  border-2 border-yellow-600 hover:border-yellow-400 rounded-lg mx-2 px-2 py-1 text-lg hidden"
+            id="changePassBtn"
+            onclick="toggleUserDataPasswordVisibility()"
+          >
+            Change password
+          </button>
+          <button
+            class="bg-teal-600 hover:bg-teal-400  border-2 border-yellow-600 hover:border-yellow-400 rounded-lg mx-2 px-2 py-1 text-lg hidden"
+            id="changeDataBtn"
+            onclick="toggleUserDataPasswordVisibility()"
+          >
+            Change data
+          </button>
+          <button
+            class="bg-lime-600 hover:bg-lime-400  border-2 border-yellow-600 hover:border-yellow-400 rounded-lg mx-2 px-2 py-1 text-lg hidden"
+            id="saveBtn"
+            form="userDataForm"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const editBtn = document.querySelector('#editBtn');
+    const cancelBtn = document.querySelector('#cancelBtn');
+    const saveBtn = document.querySelector('#saveBtn');
+    const changePassBtn = document.querySelector('#changePassBtn');
+    const changeDataBtn = document.querySelector('#changeDataBtn');
+    const uploadPhotoBtn = document.querySelector('#uploadPhotoBtn');
+    const userDataLabels = document.querySelectorAll('.userDataLabel');
+    const userDataInputs = document.querySelectorAll('.userDataInput');
+    const photoInput = document.querySelector('#photo');
+    const userPasswordLabels = document.querySelectorAll('.userPasswordLabel');
+    const userPasswordInputs = document.querySelectorAll('.userPasswordInput');
+
+    function toggleUserDataAvailability() {
+      editBtn.classList.toggle('hidden');
+      cancelBtn.classList.toggle('hidden');
+      saveBtn.classList.toggle('hidden');
+      uploadPhotoBtn.classList.toggle('hidden');
+      userDataLabels.forEach(label => label.classList.toggle('cursor-not-allowed'));
+      userDataInputs.forEach(input => {
+        input.classList.toggle('cursor-not-allowed');
+        input.toggleAttribute('disabled');
+      });
+    }
+    
+  function toggleUserDataPasswordVisibility() {
+      changePassBtn.classList.toggle('hidden');
+      changeDataBtn.classList.toggle('hidden');
+      userPasswordLabels.forEach(label => {
+        label.classList.toggle('hidden');
+        label.classList.toggle('flex');
+      });
+      userPasswordInputs.forEach(input => input.toggleAttribute('required'));
+      userDataLabels.forEach(label => {
+        label.classList.toggle('flex');
+        label.classList.toggle('hidden');
+      });
+  }
+
+    function handleEditClick() {
+      toggleUserDataAvailability();
+      changePassBtn.classList.remove('hidden');
+    }
+
+    function handleCancelClick() {
+      if(changePassBtn.classList.contains('hidden')) {
+        toggleUserDataPasswordVisibility();
+      }
+      toggleUserDataAvailability();
+      changePassBtn.classList.add('hidden');
+      changeDataBtn.classList.add('hidden');
+    }
+  </script>
+{{/with}}

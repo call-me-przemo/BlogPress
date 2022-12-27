@@ -27,6 +27,9 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    country: DataTypes.STRING,
+    city: DataTypes.STRING,
+    about: DataTypes.TEXT,
     active: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

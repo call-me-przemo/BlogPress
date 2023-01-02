@@ -74,6 +74,39 @@ export async function login(req, res, next) {
       req.session.formError = "Given credentials are incorrect";
       return res.redirect("/account/login");
     }
+    if (req.body.staySigned) {
+      const token = uuid();
+      const tokenHash = await scryptAsync(token, "sampleSalt", 64);
+      await User.update(
+        {
+          rememberToken: tokenHash,
+        },
+        {
+          where: {
+            id: user.id,
+          },
+        }
+      );
+
+      setTimeout(async () => {
+        await User.update(
+          {
+            rememberToken: null,
+          },
+          {
+            where: {
+              id: user.id,
+            },
+          }
+        );
+      }, 7 * 24 * 60 * 60 * 1000);
+
+      res.cookie("rememberToken", token, {
+        httpOnly: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        signed: true,
+      });
+    }
     await regenerateAsync(req);
   } catch (err) {
     return next(createError(500));
@@ -83,8 +116,26 @@ export async function login(req, res, next) {
 }
 
 export async function logout(req, res, next) {
+  const rememberToken = req.signedCookies.rememberToken;
   try {
     await destroyAsync(req);
+    if (rememberToken) {
+      const tokenHash = await scryptAsync(rememberToken, "sampleSalt", 64);
+      await User.update(
+        {
+          rememberToken: null,
+        },
+        {
+          where: {
+            rememberToken: tokenHash,
+          },
+        }
+      );
+      res.clearCookie("rememberToken", {
+        httpOnly: true,
+        signed: true,
+      });
+    }
   } catch (err) {
     return next(createError(500));
   }

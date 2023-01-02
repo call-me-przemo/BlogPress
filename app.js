@@ -13,6 +13,8 @@ import csurf from "csurf";
 import compression from "compression";
 import { sequelize } from "./db/connection.js";
 import "./db/relations.js";
+import { scryptAsync } from "./auth/index.js";
+import { User } from "./db/models/user.js";
 
 export const app = express();
 const port = process.env.PORT || 3000;
@@ -29,7 +31,7 @@ hbs.registerPartials(join(__dirname, "views/partials"));
 app.use(compression());
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser("jslk2987sdfvAvja8dfj;jfa087lkj"));
 app.use(express.static(join(__dirname, "public")));
 app.use(
   session({
@@ -43,8 +45,21 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   res.locals.logged = req.session.userId ? true : false;
+  const rememberToken = req.signedCookies.rememberToken;
+  if (!res.locals.logged && rememberToken) {
+    try {
+      const tokenHash = await scryptAsync(rememberToken, "sampleSalt", 64);
+      const user = await User.findOne({ where: { rememberToken: tokenHash } });
+      if (user) {
+        req.session.userId = user.id;
+        res.locals.logged = true;
+      }
+    } catch (err) {
+      return next(createError(500));
+    }
+  }
   next();
 });
 app.use("/", indexRouter);
@@ -63,6 +78,8 @@ app.use((err, req, res, next) => {
     title: `${err.status} - ${err.message}`,
   });
 });
+
+app.locals.date = new Date().getFullYear();
 
 process.on("SIGTERM", close);
 process.on("SIGINT", close);

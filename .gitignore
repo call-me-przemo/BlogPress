@@ -1,4 +1,8 @@
 node_modules
-public/stylesheets/*
+public/stylesheets
 tmp/*
 !tmp/.gitkeep
+public/images/users/*
+!public/images/users/default.png
+!public/images/users/sample.webp
+public/images/posts/*

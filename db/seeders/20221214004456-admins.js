@@ -1,5 +1,5 @@
 "use strict";
-const auth = import("../../auth/index.js");
+const auth = import("../../helpers.js");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -14,19 +14,19 @@ module.exports = {
      * }], {});
      */
 
-    const { scryptAsync } = await auth;
+    const { scryptAsync, PASSWORD_SALT } = await auth;
     const now = new Date();
 
     await queryInterface.bulkInsert("Admins", [
       {
         nick: "AdminOne",
-        password: await scryptAsync("adminOnePass", "AdminOne", 64),
+        password: await scryptAsync("adminOnePass", PASSWORD_SALT, 64),
         createdAt: now,
         updatedAt: now,
       },
       {
         nick: "AdminTwo",
-        password: await scryptAsync("adminTwoPass", "AdminTwo", 64),
+        password: await scryptAsync("adminTwoPass", PASSWORD_SALT, 64),
         createdAt: now,
         updatedAt: now,
       },

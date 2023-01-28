@@ -1,7 +1,12 @@
-{{#with user}}
   <div
     class="flex flex-col relative h-full justify-center items-center my-8 mx-24 text-lg"
   >
+    {{#if message}}
+      <div class="text-red-600 font-semibold text-xl p-2">
+        {{message}}
+      </div>
+    {{/if}}
+    {{#with user}}
     <div class="w-full h-1/10 text-3xl font-semibold mb-4">
       <h1>Hello {{nick}}</h1>
     </div>
@@ -17,8 +22,8 @@
             <div>You don't have any posts yet!</div>
           {{/unless}}
           {{#each Posts}}
-            <a class="w-5/6 p-2 hover:text-amber-400" href="/posts/{{this.id}}">
-              {{this.subject}}
+            <a class="w-5/6 p-2 hover:text-amber-400" href="/posts/{{id}}">
+              {{subject}}
             </a>
           {{/each}}
         </div>
@@ -39,9 +44,11 @@
         >
           <div>
             <img
-              src="images/users/{{#unless this.avatarPath}}default.png{{/unless}}{{#if this.avatarPath}}{{avatarPath}}{{/if}}"
+              src="images/users/{{#unless avatarPath}}default.png{{/unless}}{{#if avatarPath}}{{avatarPath}}{{/if}}"
               alt="user avatar"
-              class="w-1/4 rounded-full mx-auto my-6"
+              class="w-56 rounded-full mx-auto my-6"
+              width="300"
+              height="300"
             />
             <button
               class="bg-teal-600 hover:bg-teal-400  border-2 border-yellow-600 hover:border-yellow-400 rounded-lg mx-2 px-2 py-1 text-lg w-36 hidden truncate"
@@ -51,8 +58,10 @@
               Upload photo
             </button>
           </div>
-            <form action="" method="post" id="userDataForm" enctype="multipart/form-data" class="m-4 w-3/4">
+            <form action="/account" method="post" id="userDataForm" enctype="multipart/form-data" class="m-4 w-3/4">
+              {{/with}}
               <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+              {{#with user}}
               <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
                 <div>Nick:</div>
                   <input type="text"
@@ -60,7 +69,7 @@
                   name="nick"
                   minlength="4"
                   maxlength="30"
-                  value="{{this.nick}}"
+                  value="{{nick}}"
                   disabled>
               </label>
               <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
@@ -70,7 +79,7 @@
                   name="firstName"
                   minlength="2"
                   maxlength="50"
-                  value="{{this.firstName}}"
+                  value="{{firstName}}"
                   disabled>
               </label>
               <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
@@ -80,7 +89,7 @@
                   name="lastName"
                   minlength="2"
                   maxlength="50"
-                  value="{{this.lastName}}"
+                  value="{{lastName}}"
                   disabled>
               </label>
               <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
@@ -91,7 +100,7 @@
                   type="email"
                   minlength="4"
                   maxlength="50"
-                  value="{{this.email}}"
+                  value="{{email}}"
                   disabled>
               </label>
               <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
@@ -101,7 +110,7 @@
                   name="country"
                   minlength="2"
                   maxlength="50"
-                  value="{{this.country}}"
+                  value="{{country}}"
                   disabled>
               </label>
               <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
@@ -111,7 +120,7 @@
                   name="city"
                   minlength="2"
                   maxlength="50"
-                  value="{{this.city}}"
+                  value="{{city}}"
                   disabled>
               </label>
               <label class="flex justify-between m-6 cursor-not-allowed w-full userDataLabel">
@@ -122,7 +131,7 @@
                   minlength="10"
                   maxlength="2000"
                   rows="12"
-                  disabled>{{this.about}}</textarea>
+                  disabled>{{about}}</textarea>
               </label>
               <label class="hidden justify-between m-6 cursor-not-allowed w-full userPasswordLabel">
                 <div>Current password:</div>
@@ -148,7 +157,7 @@
                   minlength="10"
                   maxlength="50">
               </label>
-              <input type="file" name="photo" id="photo" class="hidden" onchange="uploadPhotoBtn.textContent = this.files[0].name" accept="image/*">
+              <input type="file" name="photo" id="photo" class="hidden" onchange="uploadPhotoBtn.textContent = files[0].name" accept="image/*">
             </form>
         </div>
         <div class="w-full p-4">

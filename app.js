@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser";
 import hbs from "hbs";
 import session from "express-session";
 import { join } from "path";
-import { __dirname } from "./rootdir.js";
 import { router as indexRouter } from "./routes/index.js";
 import store from "./db/session.js";
 import { router as accountRouter } from "./routes/account.js";
@@ -13,8 +12,13 @@ import csurf from "csurf";
 import compression from "compression";
 import { sequelize } from "./db/connection.js";
 import "./db/relations.js";
-import { scryptAsync } from "./auth/index.js";
 import { User } from "./db/models/user.js";
+import {
+  parseForms,
+  scryptAsync,
+  PASSWORD_SALT,
+  __dirname,
+} from "./helpers.js";
 
 export const app = express();
 const port = process.env.PORT || 3000;
@@ -30,7 +34,7 @@ hbs.registerPartials(join(__dirname, "views/partials"));
 
 app.use(compression());
 app.use(logger("dev"));
-app.use(express.urlencoded({ extended: false }));
+app.use(parseForms);
 app.use(cookieParser("jslk2987sdfvAvja8dfj;jfa087lkj"));
 app.use(express.static(join(__dirname, "public")));
 app.use(
@@ -44,14 +48,18 @@ app.use(
     },
   })
 );
+app.use(csrf);
 
 app.use(async (req, res, next) => {
   res.locals.logged = req.session.userId ? true : false;
   const rememberToken = req.signedCookies.rememberToken;
   if (!res.locals.logged && rememberToken) {
     try {
-      const tokenHash = await scryptAsync(rememberToken, "sampleSalt", 64);
-      const user = await User.findOne({ where: { rememberToken: tokenHash } });
+      const tokenHash = await scryptAsync(rememberToken, PASSWORD_SALT, 64);
+      const user = await User.findOne({
+        where: { rememberToken: tokenHash },
+        attributes: ["id"],
+      });
       if (user) {
         req.session.userId = user.id;
         res.locals.logged = true;
@@ -63,7 +71,7 @@ app.use(async (req, res, next) => {
   next();
 });
 app.use("/", indexRouter);
-app.use("/account", csrf, accountRouter);
+app.use("/account", accountRouter);
 
 app.use((req, res, next) => {
   next(createError(404));

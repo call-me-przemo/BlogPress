@@ -1,7 +1,7 @@
 import hbs from "hbs";
 import { join } from "path";
 import { readFile } from "fs/promises";
-import { __dirname } from "../rootdir.js";
+import { __dirname } from "../helpers.js";
 import { createTransport } from "nodemailer";
 import { load } from "js-yaml";
 
@@ -26,21 +26,25 @@ export async function sendActivationMail(mail, token) {
     activationUrl,
   });
 
-  await transporter.sendMail({
-    from: '"BlogPress" <no-reply@BlogPress.com>',
-    to: mail,
-    subject: "Account activation",
-    text: `Thanks for registration\n
+  try {
+    await transporter.sendMail({
+      from: '"BlogPress" <no-reply@BlogPress.com>',
+      to: mail,
+      subject: "Account activation",
+      text: `Thanks for registration\n
     Your account has been created but is inactive\n
     To activate your account follow link: ${activationUrl}\n
     Greetings from the BlogPress Team`,
-    html,
-    attachments: [
-      {
-        filename: "logo.png",
-        path: join(__dirname, "public", "images", "logo.png"),
-        cid: "appLogo",
-      },
-    ],
-  });
+      html,
+      attachments: [
+        {
+          filename: "logo.png",
+          path: join(__dirname, "public", "images", "logo.png"),
+          cid: "appLogo",
+        },
+      ],
+    });
+  } catch (err) {
+    console.log("Sending activation mail error");
+  }
 }

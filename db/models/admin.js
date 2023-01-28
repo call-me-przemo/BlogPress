@@ -13,10 +13,6 @@ Admin.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    rememberToken: {
-      type: DataTypes.STRING,
-      unique: true,
-    },
   },
   {
     sequelize,

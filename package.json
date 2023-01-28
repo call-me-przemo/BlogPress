@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "dev:start-server": "node-dev .",
-    "dev:css-watch": "tailwind -c ./tailwindcss/tailwind.config.cjs -i ./tailwindcss/tailwind.css -o ./public/stylesheets/style.css --watch",
+    "dev:start-css": "tailwind -c ./tailwindcss/tailwind.config.cjs -i ./tailwindcss/tailwind.css -o ./public/stylesheets/style.css --watch",
     "dev:start-db": "docker run -d --rm -p3306:3306 -e MYSQL_ROOT_PASSWORD=mysql_root --name db mysql",
     "dev:setup-db": "node ./db/setup.js",
     "dev:migrate-db": "node ./db/migrate.js",
@@ -24,6 +24,7 @@
     "csurf": "^1.11.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
+    "formidable": "^2.1.1",
     "hbs": "^4.2.0",
     "http-errors": "^2.0.0",
     "js-yaml": "^4.1.0",

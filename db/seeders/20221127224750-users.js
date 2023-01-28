@@ -1,5 +1,5 @@
 "use strict";
-const auth = import("../../auth/index.js");
+const auth = import("../../helpers.js");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -13,25 +13,26 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    const { scryptAsync } = await auth;
+    const { scryptAsync, PASSWORD_SALT } = await auth;
     const now = new Date();
 
     await queryInterface.bulkInsert("Users", [
       {
         nick: "The user",
-        password: await scryptAsync("topsecret123", "The user", 64),
+        password: await scryptAsync("topsecret123", PASSWORD_SALT, 64),
         email: "user@mail.com",
         firstName: "John",
         lastName: "Doe",
         active: false,
+        activationToken: "8a714f49-31d1-45e3-a8ed-1d78dbdec3cc",
         createdAt: now,
         updatedAt: now,
         city: "Torino",
-        avatarPath: "sample.jpeg",
+        avatarPath: "sample.webp",
       },
       {
         nick: "Another user",
-        password: await scryptAsync("thepassword8", "Another user", 64),
+        password: await scryptAsync("thepassword8", PASSWORD_SALT, 64),
         email: "jane@mail.com",
         firstName: "Jane",
         lastName: "Freeman",
@@ -45,7 +46,7 @@ module.exports = {
       },
       {
         nick: "Fast writer",
-        password: await scryptAsync("fastWriterPass", "Fast writer", 64),
+        password: await scryptAsync("fastWriterPass", PASSWORD_SALT, 64),
         email: "writer@mail.com",
         firstName: "Amy",
         lastName: "Lazarus",
@@ -56,11 +57,11 @@ module.exports = {
         city: "Kyiv",
         about:
           "met nisl suscipit adipiscing bibendum est ultricies integer. Cursus mattis molestie a iaculis.",
-        avatarPath: "sample.jpeg",
+        avatarPath: "sample.webp",
       },
       {
         nick: "Impatient reader",
-        password: await scryptAsync("mySecretPass88", "Impatient reader", 64),
+        password: await scryptAsync("mySecretPass88", PASSWORD_SALT, 64),
         email: "bookworm@library.com",
         firstName: "Mark",
         lastName: "Flatsugar",
@@ -71,11 +72,11 @@ module.exports = {
       },
       {
         nick: "Fearless stuntgirl",
-        password: await scryptAsync("realBadassGirl", "Fearless stuntgirl", 64),
+        password: await scryptAsync("realBadassGirl", PASSWORD_SALT, 64),
         email: "ironfemale@whitewhale.org",
         firstName: "Kate",
         lastName: "Jolie",
-        active: true,
+        active: false,
         createdAt: now,
         updatedAt: now,
       },

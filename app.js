@@ -1,13 +1,14 @@
 import express from "express";
-import createError from "http-errors";
+import createHttpError from "http-errors";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
 import hbs from "hbs";
 import session from "express-session";
 import { join } from "path";
-import { router as indexRouter } from "./routes/index.js";
 import store from "./db/session.js";
+import { router as indexRouter } from "./routes/index.js";
 import { router as accountRouter } from "./routes/account.js";
+import { router as postsRouter } from "./routes/posts.js";
 import csurf from "csurf";
 import compression from "compression";
 import { sequelize } from "./db/connection.js";
@@ -65,16 +66,17 @@ app.use(async (req, res, next) => {
         res.locals.logged = true;
       }
     } catch (err) {
-      return next(createError(500));
+      return next(createHttpError(500));
     }
   }
   next();
 });
 app.use("/", indexRouter);
 app.use("/account", accountRouter);
+app.use("/posts", postsRouter);
 
 app.use((req, res, next) => {
-  next(createError(404));
+  next(createHttpError(404));
 });
 
 app.use((err, req, res, next) => {

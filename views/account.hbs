@@ -15,18 +15,20 @@
     >
       <div class="w-1/2 h-full text-center text-2xl font-medium flex flex-col">
         <h2 class="m-3">Your latest ten posts</h2>
-        <div
+        <ul
           class="h-full w-full text-lg font-normal flex flex-col justify-center items-center divide-y divide-cyan-400 dark:divide-lime-300"
         >
           {{#unless Posts.length}}
-            <div>You don't have any posts yet!</div>
+            <li>You don't have any posts yet!</li>
           {{/unless}}
           {{#each Posts}}
-            <a class="w-5/6 p-2 hover:text-amber-400" href="/posts/{{id}}">
-              {{subject}}
-            </a>
+            <li class="w-5/6 p-2">
+              <a class="flex items-center justify-center dark:hover:text-amber-400 hover:text-amber-600" href="/posts/{{id}}">
+                {{subject}}
+              </a>
+            </li>
           {{/each}}
-        </div>
+        </ul>
         <div class="w-full p-4">
           <a href="/posts/create">
             <button

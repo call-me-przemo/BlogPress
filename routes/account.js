@@ -9,13 +9,12 @@ import {
 import express from "express";
 import { User } from "../db/models/user.js";
 import { Post } from "../db/models/post.js";
-import createError from "http-errors";
+import createHttpError from "http-errors";
 import {
   validateAccountInfo,
   validateLogin,
   validateRegistration,
 } from "../validators/index.js";
-import createHttpError from "http-errors";
 import { rm } from "fs/promises";
 import { join } from "path";
 import { mvAsync, __dirname, PASSWORD_SALT, scryptAsync } from "../helpers.js";
@@ -32,7 +31,7 @@ router.get("/", isUser, async (req, res, next) => {
       subQuery: false,
     });
   } catch (err) {
-    return next(createError(500));
+    return next(createHttpError(500));
   }
   user = user.get();
 

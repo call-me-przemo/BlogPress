@@ -36,7 +36,6 @@ module.exports = {
           "Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Parturient montes nascetur ridiculus mus. Dui accumsan sit amet nulla facilisi morbi. Morbi enim nunc faucibus a. Facilisis gravida neque convallis a cras. Consequat id porta nibh venenatis cras. Phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam. Sed adipiscing diam donec adipiscing tristique risus nec feugiat. Egestas congue quisque egestas diam in arcu cursus. Lacus sed turpis tincidunt id aliquet risus feugiat. Felis imperdiet proin fermentum leo. Eget gravida cum sociis natoque penatibus et magnis dis. Scelerisque eleifend donec pretium vulputate. Sit amet mattis vulputate enim nulla aliquet porttitor. Egestas integer eget aliquet nibh praesent tristique magna. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut.",
         createdAt: now,
         updatedAt: now,
-        logoPath: "v8.svg",
       },
       {
         subject: "Aenean vel elit scelerisque mauris pellentesque pulvinar.",
@@ -44,7 +43,6 @@ module.exports = {
           "Aenean vel elit scelerisque mauris pellentesque pulvinar. Ultrices tincidunt arcu non sodales neque sodales ut etiam. Aenean pharetra magna ac placerat vestibulum. Id aliquet risus feugiat in ante metus dictum at tempor. Leo a diam sollicitudin tempor id eu. Iaculis urna id volutpat lacus laoreet non. Lectus magna fringilla urna porttitor rhoncus dolor purus. Nulla pharetra diam sit amet nisl. Elementum curabitur vitae nunc sed. Tempus urna et pharetra pharetra massa massa ultricies. In mollis nunc sed id semper risus in hendrerit gravida. Ultricies mi quis hendrerit dolor magna eget. Lectus vestibulum mattis ullamcorper velit. Arcu felis bibendum ut tristique et. In arcu cursus euismod quis. Quis auctor elit sed vulputate mi. Sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra. Hac habitasse platea dictumst quisque sagittis purus. Risus nullam eget felis eget nunc lobortis mattis. Dui ut ornare lectus sit amet est placerat in egestas.",
         createdAt: now,
         updatedAt: now,
-        logoPath: "v8.svg",
       },
       {
         subject: "Nisl rhoncus mattis rhoncus urna neque viverra justo nec",
@@ -59,7 +57,6 @@ module.exports = {
           "Amet nisl suscipit adipiscing bibendum. Malesuada pellentesque elit eget gravida cum sociis natoque penatibus et. Felis eget nunc lobortis mattis aliquam faucibus purus. Auctor urna nunc id cursus metus aliquam eleifend mi. Id ornare arcu odio ut sem. Lectus magna fringilla urna porttitor rhoncus dolor purus non enim. Egestas purus viverra accumsan in nisl. Auctor elit sed vulputate mi sit amet. Lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque. Imperdiet dui accumsan sit amet nulla facilisi. Nunc sed id semper risus in hendrerit. Lectus quam id leo in vitae turpis massa sed elementum. Tempor orci eu lobortis elementum nibh tellus molestie. Mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus et netus. Cursus turpis massa tincidunt dui ut ornare lectus. Sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque.",
         createdAt: now,
         updatedAt: now,
-        logoPath: "v8-liftoff.svg",
       },
       {
         subject:

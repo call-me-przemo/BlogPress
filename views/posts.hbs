@@ -1,0 +1,16 @@
+<ul
+  class="h-full w-full text-lg font-normal flex flex-col justify-center items-center divide-y divide-cyan-400 dark:divide-lime-300"
+>
+  {{#each posts}}
+    <li class="w-11/12">
+      <a
+        class="flex justify-between items-center h-14 py-2
+        dark:hover:text-amber-400 hover:text-amber-600"
+        href="/posts/{{id}}"
+      >
+        <img src="/images/posts/{{#unless logoPath}}default.png{{/unless}}{{#if logoPath}}{{logoPath}}{{/if}}" alt="post image" class="w-12" />
+        <div class="justify-self-end">{{subject}}</div>
+      </a>
+    </li>
+  {{/each}}
+</ul>

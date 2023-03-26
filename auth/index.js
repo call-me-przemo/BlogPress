@@ -1,5 +1,5 @@
 import { User } from "../db/models/user.js";
-import createError from "http-errors";
+import createHttpError from "http-errors";
 import { destroyAsync, regenerateAsync } from "../db/session.js";
 import { Op } from "sequelize";
 import { v4 as uuid, validate } from "uuid";
@@ -60,7 +60,7 @@ export async function login(req, res, next) {
     }
     await regenerateAsync(req);
   } catch (err) {
-    return next(createError(500));
+    return next(createHttpError(500));
   }
   req.session.userId = user.id;
   return next();
@@ -88,13 +88,13 @@ export async function logout(req, res, next) {
       });
     }
   } catch (err) {
-    return next(createError(500));
+    return next(createHttpError(500));
   }
   return next();
 }
 
 export function isUser(req, res, next) {
-  req.session?.userId ? next() : next(createError(403));
+  req.session?.userId ? next() : next(createHttpError(403));
 }
 
 export async function register(req, res, next) {
@@ -129,7 +129,7 @@ export async function register(req, res, next) {
     }
     await regenerateAsync(req);
   } catch (err) {
-    return next(createError(500));
+    return next(createHttpError(500));
   }
 
   sendActivationMail(user.email, user.activationToken);
@@ -140,7 +140,7 @@ export function isGuest(req, res, next) {
   if (!req?.session?.userId && !req?.session.adminId) {
     next();
   } else {
-    next(createError(403));
+    next(createHttpError(403));
   }
 }
 
@@ -148,7 +148,7 @@ export async function activateAccount(req, res, next) {
   const uuid = req.params.uuid;
   let user;
   if (!validate(uuid)) {
-    return next(createError(404));
+    return next(createHttpError(404));
   }
 
   try {
@@ -158,7 +158,7 @@ export async function activateAccount(req, res, next) {
     });
 
     if (!user) {
-      return next(createError(404));
+      return next(createHttpError(404));
     }
 
     await user.update({
@@ -166,7 +166,7 @@ export async function activateAccount(req, res, next) {
       activationToken: null,
     });
   } catch (err) {
-    return next(createError(500));
+    return next(createHttpError(500));
   }
 
   return next();

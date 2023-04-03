@@ -1,16 +1,18 @@
-<ul
-  class="h-full w-full text-lg font-normal flex flex-col justify-center items-center divide-y divide-cyan-400 dark:divide-lime-300"
->
+<div class="h-full flex flex-col justify-center m-8">
+  <ul
+  class="text-lg font-normal divide-y divide-cyan-400 dark:divide-lime-300 p-2"
+  >
   {{#each posts}}
-    <li class="w-11/12">
+    <li class="">
       <a
         class="flex justify-between items-center h-14 py-2
         dark:hover:text-amber-400 hover:text-amber-600"
         href="/posts/{{id}}"
       >
         <img src="/images/posts/{{#unless logoPath}}default.png{{/unless}}{{#if logoPath}}{{logoPath}}{{/if}}" alt="post image" class="w-12" />
-        <div class="justify-self-end">{{subject}}</div>
+        <div class="justify-self-end">{{title}}</div>
       </a>
     </li>
   {{/each}}
-</ul>
+  </ul>
+</div>

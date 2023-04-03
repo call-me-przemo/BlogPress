@@ -5,7 +5,7 @@ export class Post extends Model {}
 
 Post.init(
   {
-    subject: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },

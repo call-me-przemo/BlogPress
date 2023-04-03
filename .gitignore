@@ -1,8 +1,16 @@
 node_modules
+
 public/stylesheets
+
 tmp/*
 !tmp/.gitkeep
+
 public/images/users/*
 !public/images/users/default.png
 !public/images/users/sample.webp
+
 public/images/posts/*
+!public/images/posts/default.png
+!public/images/posts/tanks.jpeg
+!public/images/posts/v8-liftoff.svg
+!public/images/posts/v8.svg

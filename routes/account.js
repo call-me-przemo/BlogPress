@@ -35,7 +35,7 @@ router.get("/", isUser, async (req, res, next) => {
   }
   user = user.get();
 
-  res.render("account", {
+  res.render("account/dashboard", {
     csrfToken: req.csrfToken(),
     title: "Account",
     account: true,
@@ -46,7 +46,7 @@ router.get("/", isUser, async (req, res, next) => {
 });
 
 router.get("/login", isGuest, (req, res, next) => {
-  res.render("login", {
+  res.render("account/login", {
     title: "Sign in",
     login: true,
     csrfToken: req.csrfToken(),
@@ -60,7 +60,7 @@ router.post("/login", validateLogin, login, (req, res, next) => {
 });
 
 router.get("/register", isGuest, (req, res, next) => {
-  res.render("register", {
+  res.render("account/register", {
     title: "Sign up",
     register: true,
     csrfToken: req.csrfToken(),
@@ -78,7 +78,7 @@ router.get("/logout", isUser, logout, (req, res, next) => {
 });
 
 router.get("/activate/alert", (req, res, next) => {
-  res.render("activationStatus", {
+  res.render("account/activationStatus", {
     title: "Inactive account",
     message:
       "Your account is inactive, please follow the email instructions to activate it",
@@ -86,7 +86,7 @@ router.get("/activate/alert", (req, res, next) => {
 });
 
 router.get("/activate/:uuid", activateAccount, (req, res, next) => {
-  res.render("activationStatus", {
+  res.render("account/activationStatus", {
     title: "Activation completed",
     message: `Your account has been activated, you can log in
     <a href="/account/login" class="hover:text-cyan-500 dark:hover:text-lime-400">here</a>`,

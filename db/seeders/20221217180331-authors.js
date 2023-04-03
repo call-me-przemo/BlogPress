@@ -74,6 +74,12 @@ module.exports = {
         createdAt: now,
         updatedAt: now,
       },
+      {
+        UserId: 5,
+        PostId: 8,
+        createdAt: now,
+        updatedAt: now,
+      },
     ]);
   },
 

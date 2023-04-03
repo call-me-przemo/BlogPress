@@ -1,0 +1,39 @@
+<div
+  class="h-full flex flex-col items-center m-8 border border-cyan-500 dark:border-lime-400 rounded"
+>
+  {{#with post}}
+    <div class="p-4 w-full text-xl">
+      <span class="font-bold">Authors:</span>
+      {{#each Users}}
+        {{nick}},
+      {{/each}}
+    </div>
+    <div class="flex flex-col h-full justify-center items-center">
+      {{#if logoPath}}
+        <img
+          src="/images/posts/{{logoPath}}"
+          alt="post image"
+          width="600"
+          height="600"
+          class="rounded-lg m-4"
+        />
+      {{/if}}
+      <h2 class="m-4 font-bold text-2xl">{{title}}</h2>
+      <p class="text-lg p-10">{{content}}</p>
+    </div>
+    <div class="w-full p-2">
+      <h3 class="italic font-semibold text-xl m-2">Comments:</h3>
+      <ul class="p-4 divide-y divide-cyan-400 dark:divide-lime-300">
+        {{#each Comments}}
+          <li class="p-1">
+            <div class="font-semibold">{{User.nick}}</div>
+            <div class="flex justify-between">
+              <span class="italic">{{content}}</span>
+              <span>{{rate}}/5</span>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/with}}
+</div>
